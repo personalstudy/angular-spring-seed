@@ -1,0 +1,168 @@
+<div ng-show="!editMode" xmlns="http://www.w3.org/1999/html">
+
+<div class="container well well-sm">
+    <!--<div class="row">-->
+        <span class="small pull-right" aria-hidden="true"><button class="btn btn-link btn-xs" ng-click="newProduct()" ng-if="isAuthorized('MERCHANT','ADMIN')">
+        <i class="glyphicon glyphicon-plus-sign"></i> 添加菜品</button></span>
+
+        <div class="col-lg-3 col-md-3">
+            <img src="{{merchant.logo}}" class="img-thumbnail" alt="{{merchant.name}}">
+        </div>
+        <div class="col-lg-7 col-md-7">
+            <h4>{{merchant.name}}</h4>
+            <div class="mer-item-star">
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
+            </div>
+            <div class="">人均消费 : {{merchant.consume}} 元</div>
+            <div class="">配送费 : {{merchant.delivery_fee}}元</div>
+            <div class="">
+                送达时间 : <span>{{merchant.delivery_time}}</span> 分钟送达
+            </div>
+            <div>主营业务 : {{merchant.business}}</div>
+            <div>地址 : {{merchant.location}}</div>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <div> <a ng-href="#!!!/merchant/{{merchant.id}}/order">查看订单 </a></div>
+        </div>
+    <!--</div>-->
+</div>
+
+<div class="container">
+    <tabset>
+        <tab heading="菜品">
+            <div class="col-lg-6 col-md-6 prod-item" ng-repeat="item in products | orderBy:predicate">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-if="isAuthorized('MERCHANT','ADMIN')" ng-click="removeProduct(item.id)">&times;</button>
+
+                <img class="img-thumbnail prod-item-img pull-left " src="{{item.logo}}" ng-show="item.logo"/>
+                <div class="">
+                    <span class="pull-left splitter">{{item.name}}</span>
+                    <div class="pull-right">
+                        <div class="right">
+                            <span class="pull-right"><strong>&yen {{item.price}}</strong></span>
+                        </div>
+                        <div class="right">
+                            <span class="btn btn-sm btn-primary label label-info" ng-click="addItem(item)"><i class="glyphicon glyphicon-shopping-cart"></i>放入购物车</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="评论">
+            <div ng-repeat="item in comments | orderBy:predicate">
+                <div>
+                    <span>ABC</span><span>在</span><span>2014/05/40 15:30</span><span>进行评论</span>
+                </div>
+                <p>我们创建了一个指令，它的核心目的是简单地向books列表中添加一本书籍，books已经注册在了我们的Book服务中。我们来把这</p>
+            </div>
+            <div class="col-lg-6 col-md-6">
+            <form method="post" role="form" class="form-horizontal">
+                <fieldset>
+                    <legend>评论:</legend>
+                    <div class="form-group">
+                        <input class="form-control" name="blogId" type="hidden">
+                        <input class="form-control"
+                                name="blogSectionId" type="hidden" value="">
+                        <input class="form-control" name="commentId"  type="hidden"  >
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 control-label"><span>Name</span>(*)</label>
+
+                        <div class="col-lg-10 col-md-10">
+                            <input class="form-control" name="author" type="text" placeholder="Author" autofocus required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 control-label"><span>Email</span>(*)</label>
+
+                        <div class="col-lg-10 col-md-10">
+                            <input class="form-control" name="email" type="text" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 control-label">Content</label>
+
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" name="commentContent" placeholder="Comment Content" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-md-offset-2 col-lg-10  col-md-10">
+                            <input type="submit" class="btn btn-primary" value="Comment">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </tab>
+        <tab heading="简介">
+
+        </tab>
+    </tabset>
+
+</div>
+</div>
+
+<div ng-show="editMode" class="col-lg-6 col-md-6">
+    <form class="form-horizontal" poUserMerchant="form">
+        <fieldset>
+            <legend class="modal-title" ng-show="!editMode">添加商品</legend>
+            <legend class="modal-title" ng-show="editMode">修改商品</legend>
+
+            <div class="form-group">
+                <div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+            </div>
+
+            <div class="form-group">
+                <div class=" col-md-9 col-md-offset-3">
+                    <input class="form-control" type="hidden" ng-model="product.id" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">商品名称</label>
+
+                <div class=" col-md-9">
+                    <input class="form-control" type="text" ng-model="product.name" placeholder="商品名称" required min="2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">商品价格</label>
+
+                <div class=" col-md-9">
+                    <input class="form-control" type="text" ng-model="product.price" placeholder="商品价格" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label  col-md-3">商品图标</label>
+
+                <div class="col-md-9">
+                    <input class="form-control" type="text" ng-model="product.logo" placeholder="商品图片" required min="4">
+                </div>
+            </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-3">
+                <button type="button" class="btn btn-primary"
+                        ng-disabled="!product.name || !product.price" ng-hide="editMode"
+                        ng-click="createProduct(product)">添加
+                </button>
+
+                <button type="button" class="btn btn-primary"
+                        ng-disabled="!product.name || !product.price" ng-show="editMode"
+                        ng-click="updateProduct(product.id, product)">保存
+                </button>
+                <button type="button" class="btn" ng-click="resetProduct()">取消</button>
+            </div>
+        </div>
+</fieldset>
+    </form>
+    <!-- /.modal-dialog -->
+</div>

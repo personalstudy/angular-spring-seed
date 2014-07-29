@@ -1,0 +1,65 @@
+<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
+
+    <form role="form" name="form"
+          class="form-horizontal ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+          novalidate ng-submit="login()" form-autofill-fix>
+        <fieldset>
+            <legend>登录</legend>
+
+            <div class="form-group">
+                <div class="alert alert-danger" ng-show="authenticationError">
+                    <strong>Authentication failed!</strong> Please check your credentials and try again.
+                </div>
+            </div>
+            <div class="form-group has-feedback"
+                 ng-class="{'has-success':(form.username.$dirty && form.username.$valid), 'has-error':(form.username.$dirty && form.username.$invalid)}">
+                <div class="input-group">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-user"></i></span><input
+                        class="form-control" type="email"
+                        placeholder="Username" autofocus required name='username'
+                        ng-model="username" ng-minlength=5 ng-maxlength=100 required/>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.username.$dirty && form.username.$valid"/>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.username.$dirty && form.username.$invalid"/>
+                </div>
+            </div>
+            <div class="form-group has-feedback"
+                 ng-class="{'has-success':(form.password.$dirty && form.password.$valid), 'has-error':(form.password.$dirty && form.password.$invalid)}">
+                <div class="input-group">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span><input
+                        class="form-control" type="password"
+                        placeholder="Password" name='password'
+                        ng-model="password" ng-minlength=8 ng-maxlength=50 required>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="password"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.password.$dirty && form.password.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.password.$dirty && form.password.$invalid"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="checkbox inline_class" id="rememberMe"
+                               ng-model="rememberMe" checked>记住密码
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input
+                            class="form-control" type="hidden"
+                            name="${_csrf.parameterName}"
+                            value="${_csrf.token}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" type="submit">登录</button>
+
+                <span class="pull-right small">没有帐户<a class="btn btn-link btn-sm" href="#/register">注册</a></span>
+
+            </div>
+        </fieldset>
+    </form>
+</div>

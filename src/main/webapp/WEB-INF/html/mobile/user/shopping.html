@@ -1,0 +1,188 @@
+<div content-for="title">
+    <span>购物车</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <div class="alert alert-warning" ng-show="!shoppingCar || shoppingCar.items.length == 0">
+            您的购物车是空的，去<a href="#/">订餐</a>！
+        </div>
+        <div class="alert alert-info" ng-show="checkOuted">
+            下单成功，查看<a href="#/user/order">我的订单</a>！
+        </div>
+
+        <div ng-show="!!shoppingCar && !!shoppingCar.items && shoppingCar.items.length > 0">
+            <div class="panel">
+                <div class="panel-body">
+                    <table id="chart" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td>菜名</td>
+                            <td>数量</td>
+                            <td>小计</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in shoppingCar.items">
+                            <td>{{item.product.name}}</td>
+                            <td class="amount">
+                                <span><button class="btn btn-link btn-xs" ng-click="minusItem(item.product)"><i
+                                        class="glyphicon glyphicon-minus-sign"></i></button></span><span>{{item.number}} x {{item.product.price}} &yen</span>
+                                <span><button class="btn btn-link btn-xs" ng-click="addItem(item.product)"><i
+                                        class="glyphicon glyphicon-plus-sign"></i></button></span>
+                            </td>
+                            <td>
+                                {{item.number * item.product.price}}
+                            </td>
+                            <td>
+                                <a ng-click="removeItem(item.id)"><i class="glyphicon glyphicon-remove-circle"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>送餐费</td>
+                            <td colspan="2">
+                                <!--{{shoppingCar}}-->
+                                元
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>总计：</td>
+                            <td>
+                                {{countShoppingCarItem(shoppingCar.items)}} 份
+                            </td>
+                            <td colspan="2">
+                                {{countShoppingCarPrice(shoppingCar.items)}} 元
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <small>订餐地址</small>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group justified nav-tabs">
+                        <a class="btn btn-default"
+                           href="#Tab1"
+                           toggle="on"
+                           active-class="active">选择用餐地址
+                        </a>
+
+                        <a class="btn btn-default"
+                           href="#Tab2"
+                           toggle="on"
+                           active-class="active"
+                           ng-click="setContact()">添加用餐地址
+                        </a>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane"
+                             toggleable
+                             active-class="active"
+                             default="active"
+                             id="Tab1"
+                             exclusion-group="myTabs">
+
+                            <table class="table table-bordered table-responsive table-striped">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>用餐人</td>
+                                    <td>用餐地址</td>
+                                    <td>电话</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="citem in contacts">
+                                    <td>
+                                        <input type="checkbox" ng-click="setContact(citem)">
+                                    </td>
+                                    <td>{{citem.receipt}}</td>
+                                    <td>{{citem.address}}</td>
+                                    <td>{{citem.phone}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane"
+                             toggleable
+                             active-class="active"
+                             id="Tab2"
+                             exclusion-group="myTabs">
+
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">收货人</label>
+
+                                    <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                                        <input class="form-control" ng-model="contact.receipt"
+                                               ng-change="setContact(contact)" required ng-minlength=3 ng-maxlength=50>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">收货地址</label>
+
+                                    <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                                        <input class="form-control" ng-model="contact.address"
+                                               ng-change="setContact(contact)" required ng-minlength=5 ng-maxlength=50>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">电话</label>
+
+                                    <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                                        <input class="form-control" ng-model="contact.phone"
+                                               ng-change="setContact(contact)" required ng-minlength=8 ng-maxlength=50>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>用餐时间:</label>
+
+                        <div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="meatDate"
+                                           is-open="opened" min-date="minDate" max-date="maxDate"
+                                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                           ng-required="true" close-text="Close"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <timepicker ng-model="meatDate" minute-step="5" show-meridian="false"></timepicker>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">备注信息:</label>
+
+                        <textarea class="form-control" ng-model="addition_info">
+                        </textarea>
+
+                    </div>
+
+                    <button ng-disabled="!enableCheckout" class="btn btn-primary" ng-click="checkout()">买单</button>
+                    <!--<button class="btn btn-primary" ng-click="checkout()">买单</button>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

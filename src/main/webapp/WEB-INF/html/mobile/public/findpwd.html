@@ -1,0 +1,30 @@
+<div content-for="title">
+    <span>找回密码</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <form role="form" name="form"
+              novalidate ng-submit="login()" form-autofill-fix
+              ng-show="!success" novalidate ng-submit="sendEmail()">
+            <div bs-panel>
+                <div class="form-group has-feedback" ng-class="{'has-success': find.email}">
+                    <div>
+                        <input class="form-control" type="email" name="email" placeholder="请输入邮箱地址"
+                               ng-model="find.email"/>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="find.email"></span>
+                    </div>
+                </div>
+            </div>
+            <hr class="divider"/>
+            <div bs-panel class="form-actions">
+                <div class="form-group" >
+                    <div content-for="navbarAction">
+                        <input type="submit" value="发送" class="btn btn-primary"/>
+                    </div>
+
+                    <span class="small">去<a href="#/login">登录</a></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

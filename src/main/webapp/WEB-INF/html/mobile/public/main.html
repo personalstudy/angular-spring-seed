@@ -1,0 +1,61 @@
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div class="list-group">
+            <div class="list-group-item media" ng-repeat="item in merchants | orderBy:predicate">
+                <div class="media-body">
+                    <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+                        <h3 class="media-heading">{{item.name}}
+                            <rating ng-model="item.rate" max="5" readonly="true" class="small"></rating>
+                        </h3>
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                            <span class="small">
+                                <span>人均消费:</span>
+                            </span>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                            <span class="small">
+                                {{item.consume}}元
+                            </span>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                            <span class="small">
+                                <span>配送费:</span>
+                            </span>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                            <span class="small">
+                                {{item.delivery_fee}}元
+                            </span>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <span class="small">
+                                <span>{{item.delivery_time}}</span> 分钟送达
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                        <div>
+                            <span ng-switch on="true">
+                            <span ng-switch-when="true">
+                                <span class="label label-success pull-right">营业中</span>
+                            </span>
+                            <span ng-switch-default>
+                                <span class="label label-default pull-right"><i>暂停服务</i></span>
+                            </span>
+                            </span>
+                        </div>
+                        <div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="">
+                            <a ng-href="#/{{item.id}}" class="btn btn-xs btn-primary pull-right">
+                                进入
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <!--<a class="btn btn-primary btn-sm">添加骑士</a>-->
+    </div>
+    <div class="panel-body">
+        <div ng-repeat="cavalier in cavaliers" class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">{{cavalier.user.email}} <span class="small">[{{cavalier.user.user_number}}]</span>
+                    <!--<span class="small pull-right"><a class="btn btn-primary btn-xs">编辑</a> <a class="btn btn-danger btn-xs">删除</a></span></h4>-->
+                    </h4>
+            </div>
+
+            <div class="panel-body">
+                <div>
+                    <span>正在处理的订单:</span><span class="label label-default">{{cavalier.handling_count}}</span>
+                    <span>未处理的订单数:</span><span class="label label-danger">{{cavalier.need_handle_count}}</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,77 @@
+<div content-for="title">
+    <span>我的配送</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <div class="btn-group justified nav-tabs">
+            <a class="btn btn-primary" ng-click="ordersIndevilery()">配送中订单</a>
+            <a class="btn btn-primary" ng-click="ordersNeedToDeliver()">未取订单</a>
+        </div>
+
+        <alert type="warning" ng-show="results.length == 0">
+            没有订单！
+        </alert>
+
+        <div class="panel">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-success" ng-repeat="order in results">
+                    <div class="panel-heading">
+                        <a class="btn btn-link btn-xs" toggle target="collapse{{order.id}}">
+                            订单号:{{order.order_number}}
+                        </a>
+                        <span class="small">订单状态: {{order.order_status|orderStatus}}</span>
+                        <span class="btn btn-primary btn-xs pull-right" ng-click="finishOrder(order.id)" ng-show="type == 'ON_THE_WAY'">完成订单</span>
+                        <span class="btn btn-primary btn-xs pull-right" ng-click="getOrder(order.id)" ng-show="type == 'DELIVERED'">商家取货</span>
+                    </div>
+                    <div id="collapse{{order.id}}" toggleable active-class="in" exclusion-group="accordion1"
+                         class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="">
+                                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5">
+                                    <label class="control-label small">配送费:</label>
+                                    <label class="form-control-static">{{order.delivery_fee}}</label>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-7 col-xs-7">
+                                    <label class="control-label small">商家名称:</label>
+                                    <label class="form-control-static">{{order.merchant.name}}</label>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5">
+                                    <label class="control-label small">订单价格:</label>
+                                    <label class="form-control-static">{{order.total_price}}</label>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-7 col-xs-7">
+                                    <label class="control-label small">下单时间:</label>
+                                    <label class="form-control-static">{{order.submit_time |date:'yyyy-MM-dd HH:mm'}}</label>
+                                </div>
+                                <div>
+                                    <div class="control-label col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                                        <label class="control-label small">收货地址:</label>
+                                    </div>
+                                    <label class="form-control-static">{{order.contact.address}}</label>
+                                </div>
+                            </div>
+                            <table class="table table-responsive table-bordered small">
+                                <thead>
+                                <tr>
+                                    <td>菜品</td>
+                                    <td>数量</td>
+                                    <td>价格</td>
+                                    <td>小计</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in order.purchase_items">
+                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.number}}</td>
+                                    <td>{{item.product.price}}</td>
+                                    <td>{{item.number * item.product.price}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

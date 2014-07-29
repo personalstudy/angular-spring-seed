@@ -1,0 +1,113 @@
+<div class="well well-sm">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>订单查询</legend>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">状态</label>
+                <div class="col-lg-10 col-md-10">
+                    <select class="form-control"
+                            ng-model="status"
+                            ng-options="s for s in statusList">
+                        <option value="">-- 请选择 --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">起始日期</label>
+                <div class="col-lg-10 col-md-10">
+                    <datetimepicker ng-model="from"
+                                    today-btn="true" start-date="" end-date="{{!to? '': to}}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">截止日期</label>
+                <div class="col-lg-10 col-md-10">
+                    <datetimepicker ng-model="to" today-btn="true"
+                            start-date="from"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2">
+                    <input type="button" class="btn btn-primary" ng-click="queryOrder()" value="查询">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="btn-group btn-group-justified btn-group-sm">
+            <label ng-repeat="s in statusList" ng-click="currentOrders(s)" class="btn btn-primary" ng-click="currentOrder(s)" uncheckable ng-model="type">{{s|orderStatus}}</label>
+        </div>
+    </div>
+    <div class="panel-body">
+        <alert type="warning" ng-show="results.length == 0">
+            没有订单！
+        </alert>
+
+        <div ng-repeat="order in results" class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">订单号:{{order.order_number}}<span class="small pull-right">订单状态: {{order.order_status}}</span></h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="">
+                    <div class="col-lg-2 col-md-2 control-label">
+                        配置费
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        {{order.delivery_fee}}
+                    </div>
+                    <div class="col-lg-2 col-md-2 control-label">
+                        商家名称
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        {{order.merchant.name}}
+                    </div>
+                    <div class="col-lg-2 col-md-2 control-label">
+                        订单价格
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        {{order.total_price}}
+                    </div>
+                    <div class="col-lg-2 col-md-2 control-label">
+                        下单时间
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        {{order.submit_time}}
+                    </div>
+                    <div class="col-lg-2 col-md-2 control-label">
+                        收货地址
+                    </div>
+                    <div class="col-lg-10 col-md-10">
+                        {{order.contact.address}}
+                    </div>
+                </div>
+                <table class="table table-responsive table-bordered small">
+                    <thead>
+                        <tr>
+                            <td>菜品</td>
+                            <td>数量</td>
+                            <td>价格</td>
+                            <td>小计</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in order.purchase_items">
+                            <td>{{item.product.name}}</td>
+                            <td>{{item.number}}</td>
+                            <td>{{item.product.price}}</td>
+                            <td>{{item.number * item.product.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

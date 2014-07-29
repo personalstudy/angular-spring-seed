@@ -1,0 +1,235 @@
+<div class="well well-sm" ng-if="createOrUpdate">
+    <form class="form-horizontal" role="form" name="form">
+        <fieldset>
+            <legend>添加用户</legend>
+
+            <div class="form-group">
+                <div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+            </div>
+
+            <input class="form-control" type="hidden" ng-model="user.id" required>
+
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.email.$dirty && form.email.$valid), 'has-error':(form.email.$dirty && form.email.$invalid)}">
+                <label class="control-label col-lg-2 col-md-2">邮箱</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input name="email" type="email" class="form-control" placeholder="Email"
+
+                           ng-model="user.email" ng-minlength=5 ng-maxlength=100 required/>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="user.email"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.email.$dirty && form.email.$invalid"/>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.password.$dirty && form.password.$valid), 'has-error':(form.password.$dirty && form.password.$invalid)}" ng-hide="edit">
+                <label class="control-label col-lg-2 col-md-2">密码</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input name="password" class="form-control" type="password" placeholder="Password"
+                           ng-model="user.password" ng-minlength=8 ng-maxlength=50 required/>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.password.$dirty && form.password.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.password.$dirty && form.password.$invalid"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.password.$dirty && form.password.$valid && user.password === confirmPassword), 'has-error':(form.password.$dirty && form.password.$invalid || user.password != confirmPassword)}" ng-hide="edit">
+                <label class="control-label col-lg-2 col-md-2">确认密码</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span>
+                    <input name="confirmPassword" class="form-control" type="password" placeholder="Password Again"
+                           ng-model="confirmPassword" ng-minlength=8 ng-maxlength=50 required
+                           />
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.confirmPassword.$dirty && form.confirmPassword.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid"></span>
+                </div>
+            </div>
+
+            <input ng-model="user.profile.id" type="hidden">
+
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">昵称</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input ng-model="user.profile.display_name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">电话号码</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-phone"></i></span>
+                    <input ng-model="user.profile.phone" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-9">
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="!user.email || !user.password" ng-hide="edit"
+                            ng-click="create(user)">添加
+                    </button>
+                    <button type="button" class="btn" ng-click="reset()">取消</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div><!-- /.modal -->
+
+<div class="well well-sm" ng-if="edit">
+    <form class="form-horizontal" role="form" name="form">
+        <fieldset>
+            <legend>编辑用户</legend>
+
+            <div class="form-group">
+                <div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+            </div>
+
+            <input ng-model="profile.id" type="hidden">
+
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">昵称</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input ng-model="profile.display_name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">电话号码</label>
+                <div class="input-group col-lg-10 col-md-10">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-phone"></i></span>
+                    <input ng-model="profile.phone" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-9">
+                    <button type="button" class="btn btn-primary"
+                            ng-click="update(profile)">添加
+                    </button>
+                    <button type="button" class="btn" ng-click="reset()">取消</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div><!-- /.modal -->
+
+<div class="well well-sm" ng-if="roleAdd">
+    <form class="form-horizontal" role="form">
+        <fieldset>
+            <legend>添加角色</legend>
+            <div class="form-group">
+                <label class="control-label  col-md-3">角色</label>
+                <input type="hidden" ng-model="group_id">
+                <div class="col-md-9">
+                    <select class="form-control"
+                            ng-model="group_role_id"
+                            ng-options="role.id as role.name group by role.type for role in roles"
+                            >
+                        <option value="">-- 请选择 --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-9">
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="!user_id || !user_role_id"
+                            ng-click="addRoleToUser(user_id, user_role_id)">添加
+                    </button>
+                    <button type="button" class="btn" ng-click="reset()">取消</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="well well-sm" ng-if="groupAdd">
+    <form class="form-horizontal" role="form">
+        <fieldset>
+            <legend>添加组</legend>
+            <div class="form-group">
+                <label class="control-label  col-md-3">群组</label>
+                <input type="hidden" ng-model="user_id">
+                <div class="col-md-9">
+                    <select class="form-control"
+                            ng-model="user_group_id"
+                            ng-options="group.id as group.name for group in groups"
+                            >
+                        <option value="">-- 请选择 --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-9">
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="!user_id || !user_group_id"
+                            ng-click="addUserToGroup(user_group_id, user_id)">添加
+                    </button>
+                    <button type="button" class="btn" ng-click="reset()">取消</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+<div ng-hide="createOrUpdate">
+
+    <div class="form-group has-feedback">
+        <div class="input-group">
+            <span class="input-group-addon "><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" ng-model="asyncSelected"
+                   typeahead="u as u.email for u in queryUser(asyncSelected) | filter:{email:$viewValue}"
+                   typeahead-loading="loading"
+                   typeahead-min-length=5
+                   typeahead-wait-ms=100
+                   class="form-control"
+                   placeholder="输入邮箱, 用户编号或电话号码进行查询 ">
+        </div>
+    </div>
+
+
+
+    <span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="addUser()">
+        <i class="glyphicon glyphicon-plus-sign"></i> 添加用户</button></span>
+
+
+    <div class="alert alert-info" ng-show="users.length == 0">No User found</div>
+    <table class="table table-bordered table-striped" ng-show="users.length > 0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <td>用户编号</td>
+                <th>Role</th>
+                <th>Group</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in users | orderBy:predicate">
+            <td>{{item.id}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.user_number}}</td>
+            <td>
+                <span class="label label-info" ng-repeat="role in item.roles">
+                    {{role.name}} <a href="" class="glyphicon glyphicon-remove" ng-click="removeRoleFromUser(item.id, role.id)"></a>
+                </span>
+            </td>
+            <td>
+                <span class="label label-info" ng-repeat="group in item.groups">
+                    {{group.name}} <a href="" class="glyphicon glyphicon-remove" ng-click="removeUserFromGroup(group.id,item.id)"></a>
+                </span>
+            </td>
+            <td>
+                <span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="remove(item)">
+                    <i class="glyphicon glyphicon-remove"></i> 删除用户</button></span>
+                <!--<span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="editUser(item)">-->
+                    <!--<i class="glyphicon glyphicon-edit"></i> 编辑用户</button></span>-->
+                <span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="addGroup(item.id)">
+                    <i class="glyphicon glyphicon-plus-sign"></i> 添加用户组</button></span>
+                <span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="addRole(item.id)">
+                    <i class="glyphicon glyphicon-plus-sign"></i> 添加角色</button></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

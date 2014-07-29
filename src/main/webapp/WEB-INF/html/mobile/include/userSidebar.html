@@ -1,0 +1,23 @@
+<h1 class="app-name">我的…</h1>
+
+<div class="scrollable sidebar-scrollable">
+    <div class="scrollable-content" ng-controller="HeaderController" ng-init="init()">
+        <div class="list-group" toggle="off" bubble target="mainSidebar" ng-show="isUser">
+            <a class="list-group-item" href="#/user/account"><i class="glyphicon glyphicon-info-sign"></i> 个人信息<i
+                    class="fa fa-chevron-right pull-right"></i></a>
+            <a class="list-group-item" href="#/user/pwd"><i class="glyphicon glyphicon-lock"></i> 修改密码<i
+                    class="fa fa-chevron-right pull-right"></i></a>
+            <a class="list-group-item" href="#/user/shoppingcar"><i class="glyphicon glyphicon-shopping-cart"></i>
+                我的购物车<i class="fa fa-chevron-right pull-right"></i></a>
+            <a class="list-group-item" href="#/user/order"><i class="glyphicon glyphicon-list-alt"></i> 我的订单<i
+                    class="fa fa-chevron-right pull-right"></i></a>
+        </div>
+
+        <div class="list-group" toggle="off" bubble target="mainSidebar" ng-show="isCavalier">
+            <a class="list-group-item" ng-href="#/cavalier/current">正在配送<i
+                    class="fa fa-chevron-right pull-right"></i></a>
+            <a class="list-group-item" ng-href="#/cavalier/finished">配送历史<i class="fa fa-chevron-right pull-right"></i></a>
+        </div>
+
+    </div>
+</div>

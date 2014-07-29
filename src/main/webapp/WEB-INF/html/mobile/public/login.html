@@ -1,0 +1,94 @@
+<div content-for="title">
+    <span>登录点餐</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <form role="form" name="form" class="form-horizontal"
+              novalidate ng-submit="login()" form-autofill-fix>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success':(form.username.$dirty && form.username.$valid), 'has-error':(form.username.$dirty && form.username.$invalid)}">
+                        <label class="col-xs-3 col-sm-2 col-md-1 col-lg-1">用户名</label>
+
+                        <div class="col-xs-9 col-sm-10 col-md-11 col-lg-11">
+                            <input
+                                    class="form-control" type="email" id="username"
+                                    placeholder="用户名" autofocus required name='username'
+                                    ng-model="username" ng-minlength=5 ng-maxlength=100 required/>
+                            <span class="glyphicon glyphicon-ok-sign form-control-feedback"
+                                  ng-show="form.username.$dirty && form.username.$valid"/>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"
+                                  ng-show="form.username.$dirty && form.username.$invalid"/>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success':(form.password.$dirty && form.password.$valid), 'has-error':(form.password.$dirty && form.password.$invalid)}">
+                        <label class="col-xs-3 col-sm-2 col-md-1 col-lg-1">密码</label>
+
+                        <div class="col-xs-9 col-sm-10 col-md-11 col-lg-11">
+                            <input
+                                    class="form-control" type="password"
+                                    placeholder="Password" name='password'
+                                    ng-model="password" ng-minlength=8 ng-maxlength=50 required>
+                            <span class="glyphicon glyphicon-ok-sign form-control-feedback"
+                                  ng-show="form.password.$dirty && form.password.$valid"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"
+                                  ng-show="form.password.$dirty && form.password.$invalid"></span>
+                        </div>
+
+                        <!--<input-->
+                        <!--bs-form-control-->
+                        <!--type="password"-->
+                        <!--ng-model="password"-->
+                        <!--label="密码"-->
+                        <!--label-class="col-xs-3 col-sm-2 col-md-1 col-lg-1"-->
+                        <!--class="col-xs-9 col-sm-10 col-md-11 col-lg-11"-->
+                        <!--placeholder="密码"-->
+                        <!--ng-minlength=8 ng-maxlength=50 required-->
+                        <!--/>-->
+
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="col-xs-3 col-sm-2 col-md-1 col-lg-1">记住我</label>-->
+                        <!--<div class="col-xs-9 col-sm-10 col-md-11 col-lg-11">-->
+                        <!--<input type="checkbox">-->
+                        <!--</div>-->
+
+                        <label class="col-xs-3 col-sm-2 col-md-1 col-lg-1">记住我</label>
+
+                        <div class="col-xs-9 col-sm-10 col-md-11 col-lg-11">
+                            <switch ng-model="rememberMe">
+                            </switch>
+                        </div>
+
+                        <!--<switch-->
+                        <!--bs-form-control-->
+                        <!--ng-model="rememberMe"-->
+                        <!--label="记住我"-->
+                        <!--label-class=""-->
+                        <!--class=""-->
+                        <!--</switch>-->
+                    </div>
+
+
+                    <hr class="divider"/>
+
+                    <div class="form-group">
+                        <div content-for="navbarAction" duplicate class="col-xs-6">
+                            <button class="btn btn-primary" type="submit">
+                                登录
+                            </button>
+                        </div>
+                        <a class="btn btn-link btn-sm" href="#/findpassword">忘记密码</a>
+                        <a class="btn btn-link btn-sm pull-right" href="#/register"><i
+                            class="glyphicon glyphicon-plus-sign"></i> 注册</a>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

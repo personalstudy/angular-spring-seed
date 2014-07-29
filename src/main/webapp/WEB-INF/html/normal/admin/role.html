@@ -1,0 +1,71 @@
+<div ng-hide="createOrUpdate">
+<h3>User Roles<span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="addRole()">
+    <i class="glyphicon glyphicon-plus"></i></button></span></h3>
+<hr/>
+<div class="alert alert-info" ng-show="roles.length == 0">No Roles found</div>
+<table class="table table-bordered table-striped" ng-show="roles.length > 0">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in roles | orderBy:predicate">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.enable}}</td>
+        <td>
+            <button class="btn btn-xs btn-danger"
+                    ng-click="remove(item.id)"><i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+
+<div class="well well-sm" ng-show="createOrUpdate">
+    <form class="form-horizontal" poUserRole="form">
+        <fieldset>
+            <legend ng-show="!edit">添加</legend>
+            <legend ng-show="edit">修改</legend>
+            <div class="form-group">
+                <div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+            </div>
+
+            <div class="form-group">
+                <div class=" col-md-9 col-md-offset-3">
+                    <input class="form-control" type="hidden" ng-model="role.id" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">角色名称</label>
+
+                <div class=" col-md-9">
+                    <input class="form-control" type="text" ng-model="role.name" placeholder="角色名称"
+                           required min="2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3">
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="!role.name" ng-hide="edit"
+                            ng-click="create(role)">添加
+                    </button>
+
+                    <button type="button" class="btn" ng-click="reset()">取消</button>
+                </div>
+            </div>
+        </fieldset>
+
+
+        <div class="modal-footer">
+        </div>
+    </form>
+</div>

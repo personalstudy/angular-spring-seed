@@ -1,0 +1,97 @@
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div class="section container-fluid">
+
+            <div class="btn-group justified nav-tabs">
+                <a class="btn btn-default"
+                   href="#Tab1"
+                   toggle="on"
+                   active-class="active">菜品
+                </a>
+
+                <a class="btn btn-default"
+                   href="#Tab2"
+                   toggle="on"
+                   active-class="active">评论
+                </a>
+
+                <a class="btn btn-default"
+                   href="#Tab3"
+                   toggle="on"
+                   active-class="active">商家信息
+                </a>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane"
+                     toggleable
+                     active-class="active"
+                     default="active"
+                     id="Tab1"
+                     exclusion-group="myTabs">
+
+                    <h3 class="page-header">菜品</h3>
+
+                    <div class="list-group">
+                        <div ng-repeat="item in products | orderBy:predicate">
+                            <div class="row row-fluid list-group-item">
+                                <img src="{{item.logo}}" ng-show="item.logo"
+                                     class="img-thumbnail prod-item-img col-xs-3">
+
+                                <div class="col-xs-6">
+                                    <span>{{item.name}}</span>
+
+                                    <p></p>
+
+                                    <p>
+                                        价格:
+                                        <small>&yen {{item.price}}</small>
+                                    </p>
+                                </div>
+                                <div class="col-xs-3">
+                                    <span class="btn btn-sm btn-primary label label-info pull-right"
+                                          ng-click="addItem(item)"><i class="glyphicon glyphicon-shopping-cart"></i>放入购物车</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane"
+                     toggleable
+                     active-class="active"
+                     id="Tab2"
+                     exclusion-group="myTabs">
+                    <h3 class="page-header">评论</h3>
+
+                    <div class="list-group">
+                        <div ng-repeat="item in comments | orderBy:predicate" class="list-group-item media">
+                            <div class="media-body">
+                                <h3 class="media-heading">{{item.name}}
+
+                                </h3>
+                                <p>{{item.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane"
+                     toggleable
+                     active-class="active"
+                     id="Tab3"
+                     exclusion-group="myTabs">
+                    <h3 class="page-header">商家信息</h3>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, pariatur, sint ab
+                        assumenda est dolor molestiae maxime eaque sequi adipisci corporis molestias quos officiis rerum
+                        accusantium illo ullam commodi blanditiis.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

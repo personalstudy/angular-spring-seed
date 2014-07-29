@@ -1,0 +1,68 @@
+<div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+    <div class="alert alert-success" ng-show="success" translate="account.messages.success">
+        <strong>Registration saved!</strong> Please check your email for confirmation.
+    </div>
+
+    <div class="alert alert-danger" ng-show="error" translate="account.messages.error.fail">
+        <strong>Registration failed!</strong> Please check your input and try again.
+    </div>
+
+    <div class="alert alert-danger" ng-show="errorUserExists" translate="account.messages.error.userexists">
+        <strong>Login name already accounted!</strong> Please choose another one.
+    </div>
+
+    <div class="alert alert-danger" ng-show="doNotMatch" translate="global.messages.error.dontmatch">
+        The password and its confirmation do not match!
+    </div>
+
+    <form class="form-horizontal ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength" ng-show="!success" name="form" role="form" novalidate ng-submit="register()">
+        <fieldset>
+            <legend>注册</legend>
+
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.email.$dirty && form.email.$valid), 'has-error':(form.email.$dirty && form.email.$invalid)}">
+                <div class="input-group">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input name="email" type="email" class="form-control" placeholder="Email"
+
+                            ng-model="account.email" ng-minlength=5 ng-maxlength=100 required/>
+
+                </div>
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="account.email"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.email.$dirty && form.email.$invalid"/>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.password.$dirty && form.password.$valid), 'has-error':(form.password.$dirty && form.password.$invalid)}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input name="password" class="form-control" type="password" placeholder="Password"
+                            ng-model="account.password" ng-minlength=8 ng-maxlength=50 required/>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.password.$dirty && form.password.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.password.$dirty && form.password.$invalid"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{'has-success':(form.password.$dirty && form.password.$valid && account.password === confirmPassword), 'has-error':(form.password.$dirty && form.password.$invalid || account.password != confirmPassword)}">
+                <div class="input-group">
+                    <span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span>
+                    <input name="confirmPassword" class="form-control" type="password" placeholder="Password Again"
+                           ng-model="confirmPassword" ng-minlength=8 ng-maxlength=50 required />
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.confirmPassword.$dirty && form.confirmPassword.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid"></span>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" required ng-model="agreeTerms"/> I agree to the
+                        <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <button type="submit" ng-disabled="form.$invalid && account.password == confirmPassword" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

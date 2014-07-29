@@ -1,0 +1,71 @@
+<!--<h3>推荐餐厅</h3>-->
+
+<div class="container col-lg-12 col-md-12">
+    <!--<div class="merchant">-->
+        <!--<div class="mer-list">-->
+            <!--<a ng-repeat="item in merchants | orderBy:predicate" ng-href="#!!!/merchant/{{item.id}}" class="mer-item">-->
+                <!---->
+                <!---->
+                <!--<div >-->
+                    <!--<img src="{{item.logo}}" alt="{{item.name}}" class="mer-item-img">-->
+                    <!--<div class="mer-item-content">-->
+                        <!--<div class="mer-item-name">-->
+                            <!--<p>{{item.name}}</p>-->
+                        <!--</div>-->
+                        <!--<div class="mer-item-star">-->
+                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                            <!--<span class="glyphicon glyphicon-star-empty"></span>-->
+                        <!--</div>-->
+                        <!--<div class="mer-item-delivery">人均消费 : {{item.consume}} 元</div>-->
+                        <!--<div class="mer-item-delivery">配送费 : {{item.delivery_fee}}元</div>-->
+                        <!--<div class="mer-item-delivery">-->
+                            <!--<span>{{item.delivery_time}}</span> 分钟送达-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</a>-->
+
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <div class="list-group">
+
+            <div ng-repeat="item in merchants | orderBy:predicate" class="list-group-item media" >
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <img src="{{item.logo}}" alt="{{item.name}}" class="img-cell-sm">
+                </div>
+
+                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+                    <div class="container">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div>
+                                <h3 class="media-heading">{{item.name}}
+                                    <rating ng-model="item.rate" max="5" readonly="true" class="small"></rating>
+                                </h3>
+                            </div>
+                            <div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">人均消费 : {{item.consume}} 元</div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">配送费 : {{item.delivery_fee}}元</div>
+                            </div>
+                            <div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <span>{{item.delivery_time}}</span> 分钟送达
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                            <div> 营业中 </div>
+                            <div> <a ng-href="#!!!/{{item.id}}">进入 </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>

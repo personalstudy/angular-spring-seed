@@ -1,0 +1,139 @@
+
+<div class="scrollable sidebar-scrollable">
+    <div class="scrollable-content">
+        <form class="form-horizontal" ng-show="profileEdit">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3>修改我的信息</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input ng-model="profile.id" type="hidden">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">昵称</label>
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                            <input ng-model="profile.display_name" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">电话号码</label>
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                            <input ng-model="profile.phone" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8 col-lg-offset-1 col-md-offset-2 col-sm-offset-3 col-xs-offset-4">
+                            <input type="submit" value="保存" class="btn btn-primary" ng-click="updateProfile(profile)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" ng-show="contactEdit">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3 ng-show="!edit">添加联系信息</h3>
+                        <h3 ng-show="edit">修改联系信息</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input ng-model="contact.id" type="hidden">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">收货人</label>
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                            <input ng-model="contact.receipt" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">联系电话</label>
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                            <input ng-model="contact.phone" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-4">收货地址</label>
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                            <input ng-model="contact.address" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8 col-lg-offset-1 col-md-offset-2 col-sm-offset-3 col-xs-offset-4">
+                            <input type="submit" value="添加" class="btn btn-primary" ng-click="createContact(contact)" ng-show="!edit">
+                            <input type="submit" value="保存" class="btn btn-primary" ng-click="updateContact(contact.id, contact)" ng-show="edit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div ng-show="!profileEdit && !contactEdit">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4>
+                        {{accountInfo.profile.display_name}}<span class="small">, 欢迎您！</span><i class="glyphicon glyphicon-star" ng-show="accountInfo.profile.vip"></i>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        昵称: {{accountInfo.profile.display_name}}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        电话: {{accountInfo.profile.phone}}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="btn btn-link" ng-click="editProfile()">修改</span>
+                    </div>
+
+                    <!--<hr class="divider"/>-->
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+                        <!--<p class="small">用户角色: <span class="label label-info" ng-repeat="role in accountInfo.roles">{{role.name}}</span> </p>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+                        <!--<p class="small">用户群组: <span class="label label-info"  ng-repeat="group in accountInfo.groups">{{group.name}}</span></p>-->
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    通信地址<button class="btn btn-primary btn-xs pull-right" ng-click="addContact()">添加地址</button>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <td>收货人</td>
+                                <td>收货地址</td>
+                                <td>电话</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="citem in contacts">
+                                <td>{{citem.receipt}}</td>
+                                <td>{{citem.address}}</td>
+                                <td>{{citem.phone}}</td>
+                                <td>
+                                    <button class="btn btn-xs btn-danger"
+                                            ng-click="deleteContact(citem.id)"><i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-success"
+                                            ng-click="editContact(citem)"><i class="glyphicon glyphicon-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

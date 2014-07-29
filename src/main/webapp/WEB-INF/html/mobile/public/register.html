@@ -1,0 +1,100 @@
+<div content-for="title">
+    <span>注册</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section">
+
+        <div class="alert alert-success" ng-show="success" translate="account.messages.success">
+            <strong>Registration saved!</strong> Please check your email for confirmation.
+        </div>
+
+        <div class="alert alert-danger" ng-show="error" translate="account.messages.error.fail">
+            <strong>Registration failed!</strong> Please check your input and try again.
+        </div>
+
+        <div class="alert alert-danger" ng-show="errorUserExists" translate="account.messages.error.userexists">
+            <strong>Login name already accounted!</strong> Please choose another one.
+        </div>
+
+        <div class="alert alert-danger" ng-show="doNotMatch" translate="global.messages.error.dontmatch">
+            The password and its confirmation do not match!
+        </div>
+
+        <form role="form" name="form" class="form-horizontal"
+              novalidate form-autofill-fix
+              ng-show="!success" ng-submit="register()">
+
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success':(form.email.$dirty && form.email.$valid), 'has-error':(form.email.$dirty && form.email.$invalid)}">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input name="email" type="email" class="form-control" placeholder="电子邮件"
+                                   ng-model="account.email" ng-minlength=5 ng-maxlength=100 required/>
+                            <span class="input-group-addon">
+                                <a ng-click="checkAccountExist()">
+                                    <i class="fa fa-check-circle"></i>
+                                </a>
+                            </span>
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="account.email"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"
+                                  ng-show="form.email.$dirty && form.email.$invalid"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success':(form.password.$dirty && form.password.$valid), 'has-error':(form.password.$dirty && form.password.$invalid)}">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input name="password" class="form-control" type="password" placeholder="密码"
+                                   ng-model="account.password" ng-minlength=8 ng-maxlength=50 required/>
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-show="form.password.$dirty && form.password.$valid"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"
+                                  ng-show="form.password.$dirty && form.password.$invalid"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success':(form.password.$dirty && form.password.$valid && account.password === confirmPassword), 'has-error':(form.password.$dirty && form.password.$invalid || account.password != confirmPassword)}">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input name="confirmPassword" class="form-control" type="password"
+                                   placeholder="重复输入密码"
+                                   ng-model="confirmPassword" ng-minlength=8 ng-maxlength=50 required/>
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-show="form.confirmPassword.$dirty && form.confirmPassword.$valid"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback"
+                                  ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <switch
+                            ng-model="agreeTerms"
+                            label=""
+                            class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+                        </switch>
+                        <span class="col-xs-9 col-sm-10 col-md-11 col-lg-11 small">我同意并接受相关<a href="">服务条款</a></span>
+
+                    </div>
+
+                    <hr class="divider"/>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-6" content-for="navbarAction" duplicate>
+                            <button type="submit"
+                                    ng-disabled="form.$invalid || account.password !== confirmPassword || agreeTerms !== true"
+                                    class="btn btn-primary">注册
+                            </button>
+                        </div>
+
+                        <span class="small">已有账号，去<a href="#/login">登录</a></span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

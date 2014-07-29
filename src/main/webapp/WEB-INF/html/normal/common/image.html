@@ -1,0 +1,53 @@
+
+<h3>我的图片<span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="changeMode()" ng-if="!editMode"><i class="glyphicon glyphicon-plus-sign"></i></button></span>
+    <span class="small pull-right"><button class="btn btn-link btn-xs" ng-click="changeMode()" ng-if="editMode"><i class="glyphicon glyphicon-minus"></i></button></span>
+</h3>
+<hr/>
+
+<div class="container" ng-if="editMode">
+    <div class="">
+        <div class="form-group">
+
+
+            <div class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true" ondragover="return false">
+                <a class="btn-add-image btn btn-primary" href="javascript:void(0);" >
+                    <i class="glyphicon glyphicon-plus-sign"></i> 添加图片
+                    <input type="file" class="input-add-image" title="点击选择或拖放文件到这里"
+                           ng-file-select="onFileSelect($files)" multiple onclick="this.value=null" value="浏览...">
+
+                </a>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="container">
+                <div ng-show="selectedFiles != null" ng-repeat="f in selectedFiles" class="col-lg-4 col-md-4 well-sm">
+                    <img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}" class="img-rounded img-responsive img-center">
+
+                    <div>
+                        <progressbar value="progress[$index]" type="success" class="progress-striped active"><b>{{progress[$index]}}%</b></progressbar>
+                        <div>
+                            <label>{{f.name}} - size: {{f.size}}B - type: {{f.type}}</label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary pull-left" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
+                        <button class="btn btn-danger pull-right" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" ng-show="errorMsg != null">{{errorMsg}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="container list-group" ng-if="!editMode">
+    <div ng-repeat="item in images | orderBy:predicate" class="col-lg-3 col-md-3 list-group-item">
+        <a href="" class="center-block" title="/image/{{item.id}}">
+            <img src="/image/{{item.id}}" alt="{{item.name}}" class="img-rounded img-responsive img-center" >
+        </a>
+    </div>
+</div>

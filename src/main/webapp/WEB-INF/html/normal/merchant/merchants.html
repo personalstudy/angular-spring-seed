@@ -1,0 +1,44 @@
+<h3>我的餐厅</h3>
+
+<div class="container">
+    <div ng-repeat="item in merchants | orderBy:predicate" class="clearfix well" >
+        <div class="col-lg-2 col-md-2">
+            <img src="{{item.logo}}" alt="{{item.name}}" class="img-cell-sm">
+        </div>
+
+        <div class="col-lg-10 col-md-10">
+            <div class="container">
+                <div class="col-lg-8 col-md-8">
+                    <div>
+                        <div class="col-lg-4">
+                            <strong>{{item.name}}</strong></p>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg-4">人均消费 : {{item.consume}} 元</div>
+                        <div class="col-lg-8">配送费 : {{item.delivery_fee}}元</div>
+                    </div>
+                    <div>
+                        <div>
+                            <span>{{item.delivery_time}}</span> 分钟送达
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+
+                    <div> 营业中 </div>
+                    <div> <a ng-href="#!!!/merchant/{{item.id}}">查看店铺</a></div>
+                    <div> <a ng-href="#!!!/merchant/{{item.id}}/order">查看订单 </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

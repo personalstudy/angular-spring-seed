@@ -1,0 +1,67 @@
+<!doctype html>
+<html ng-app="AngularSpringApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="resources/favicon.ico">
+    <link rel="stylesheet" href="resources/css/app.css">
+
+    <link rel="stylesheet" href="resources/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/libs/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="resources/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--<link rel="stylesheet" href="resources/libs/bootstrap-datetime-picker/build/css/bootstrap-datetimepicker.css">-->
+
+    <title>在线订餐系统</title>
+</head>
+<body>
+<div ng-include="'/view?vn=include/header'"></div>
+
+<div class="container">
+    <div ng-view></div>
+
+</div>
+<div ng-include="'/view?vn=include/foot'"></div>
+
+
+<script src="resources/libs/jquery/dist/jquery.js"></script>
+<!--<script src="resources/libs/bootstrap/js/bootstrap.min.js"></script>-->
+
+<script src="resources/libs/angular-file-upload/angular-file-upload-html5-shim.js"></script>
+<script src="resources/libs/angular/angular.js"></script>
+<script src="resources/libs/angular-ui-bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+<script src="resources/libs/angular-route/angular-route.js"></script>
+<script src="resources/libs/angular-cookies/angular-cookies.js"></script>
+<script src="resources/libs/angular-resource/angular-resource.js"></script>
+<script src="resources/libs/angular-sanitize/angular-sanitize.js"></script>
+<script src="resources/libs/angular-file-upload/angular-file-upload.js"></script>
+<!--<script src="resources/libs/bootstrap-datetime-picker/build/css/bootstrap-datetimepicker.min.js"></script>-->
+<script src="resources/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!--<script src="resources/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>-->
+<script src="resources/libs/date-time-picker/datetimepicker.js"></script>
+
+<script src="resources/js/utils/http-auth-interceptor.js"></script>
+<script src="resources/js/utils/truncate.js"></script>
+<script src="resources/js/utils/utils.js"></script>
+
+<script src="resources/js/app.js"></script>
+<script src="resources/js/services/services.js"></script>
+<script src="resources/js/controllers/controllers.js"></script>
+<!--<script src="resources/js/controllers/UserController.js"></script>-->
+<!--<script src="resources/js/controllers/RoleController.js"></script>-->
+<!--<script src="resources/js/controllers/GroupController.js"></script>-->
+<!--<script src="resources/js/controllers/ContactController.js"></script>-->
+
+
+<!--<script src="resources/js/controllers/ImageFileController.js"></script>-->
+
+<!--<script src="resources/js/controllers/MerchantController.js"></script>-->
+<!--<script src="resources/js/controllers/ProductController.js"></script>-->
+
+<script src="resources/js/filters/filters.js"></script>
+<script src="resources/js/directives/directives.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<h3>User Contacts<span class="small"><button class="btn btn-link btn-xs" data-toggle="modal"
+                                             data-target="#createOrUpdateContact">
+    <i class="glyphicon glyphicon-plus"></i></button></span></h3>
+<hr/>
+<div class="alert alert-info" ng-show="contacts.length == 0">No Contacts found</div>
+<table class="table table-bordered table-striped" ng-show="contacts.length > 0">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in contacts | orderBy:predicate">
+        <td>{{item.id}}</td>
+        <td>{{item.user.display_name}}</td>
+        <td>
+            <button class="btn btn-xs btn-danger"
+                    ng-click="removeUserContact(item.id)"><i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button class="btn btn-xs btn-success"
+                    ng-click="editUserContact(item)"
+                    data-toggle="modal"
+                    data-target="#createOrUpdateContact"><i class="glyphicon glyphicon-edit"></i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="createOrUpdateContact" tabindex="-1" poUserContact="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" poUserContact="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h4 class="modal-title" ng-show="!editMode">Create User Contact</h4>
+                    <h4 class="modal-title" ng-show="editMode">Update User Contact</h4>
+
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class=" col-md-9 col-md-offset-3">
+                            <input class="form-control" type="hidden" ng-model="contact.id" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Contact Name</label>
+
+                        <div class=" col-md-9">
+                            <input class="form-control" type="text" ng-model="contact.name" placeholder="Contact Name"
+                                   required ng-disabled="editMode">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="" ng-hide="editMode"
+                            ng-click="addUserContact(contact)"
+                            data-dismiss="modal">Add Contact
+                    </button>
+
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="" ng-show="editMode"
+                            ng-click="updateUserContact(contact)"
+                            data-dismiss="modal">Save Contact
+                    </button>
+                    <button type="button" class="btn" ng-click="resetUserContact()" data-dismiss="modal">Reset</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->

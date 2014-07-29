@@ -1,0 +1,116 @@
+<div ng-show="!editMode" xmlns="http://www.w3.org/1999/html">
+
+    <div class="container media well">
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+            <img src="{{merchant.logo}}" alt="{{merchant.name}}" class="img-cell-sm">
+        </div>
+
+        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+            <h3 class="media-heading">{{merchant.name}}
+                <rating ng-model="merchant.rate" max="5" readonly="true" class="small"></rating>
+            </h3>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">人均消费 : {{merchant.consume}} 元</div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">配送费 : {{merchant.delivery_fee}}元</div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                送达时间 : <span>{{merchant.delivery_time}}</span> 分钟送达
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">主营业务 : {{merchant.business}}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">地址 : {{merchant.location}}</div>
+        </div>
+        <!--</div>-->
+    </div>
+
+    <div class="container">
+        <tabset>
+            <tab heading="菜品">
+                <div class="list-group">
+                    <div class="list-group-item media" ng-repeat="item in products | orderBy:predicate">
+                        <img class="img-thumbnail prod-item-img col-lg-1 col-md-1 col-sm-1 col-xs-2" src="{{item.logo}}" ng-show="item.logo"/>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <span>{{item.name}}</span>
+
+                            <p></p>
+
+                            <p>
+                                价格:
+                                <small>&yen {{item.price}}</small>
+                            </p>
+                            <!--<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">-->
+                                <!--<h4>{{item.name}}</h4>-->
+                            <!--</div>-->
+
+                            <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->
+                                <!--<p class="pull-right">-->
+                                    <!--<strong>&yen {{item.price}}</strong>-->
+                                <!--</p>-->
+                                <!--<p class="pull-right">-->
+                                    <!--<span class="btn btn-sm btn-primary label label-info" ng-click="addItem(item)"><i class="glyphicon glyphicon-shopping-cart"></i>放入购物车</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <span class="btn btn-sm btn-primary label label-info pull-right"
+                                  ng-click="addItem(item)"><i class="glyphicon glyphicon-shopping-cart"></i>放入购物车</span>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="评论">
+                <div class="list-group">
+                    <div ng-repeat="item in comments | orderBy:predicate" class="list-group-item media">
+                        <div class="media-body">
+                            <h5 class="media-heading">{{item.name}}
+                                <span>ABC</span><span>在</span><span>2014/05/40 15:30</span><span>进行评论</span>
+                            </h5>
+                            <p>{{item.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-6 col-md-6">-->
+                    <!--<form method="post" role="form" class="form-horizontal">-->
+                        <!--<fieldset>-->
+                            <!--<legend>评论:</legend>-->
+                            <!--<div class="form-group">-->
+                                <!--<input class="form-control" name="blogId" type="hidden">-->
+                                <!--<input class="form-control"-->
+                                       <!--name="blogSectionId" type="hidden" value="">-->
+                                <!--<input class="form-control" name="commentId"  type="hidden"  >-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-lg-2 col-md-2 control-label"><span>Name</span>(*)</label>-->
+
+                                <!--<div class="col-lg-10 col-md-10">-->
+                                    <!--<input class="form-control" name="author" type="text" placeholder="Author" autofocus required>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-lg-2 col-md-2 control-label"><span>Email</span>(*)</label>-->
+
+                                <!--<div class="col-lg-10 col-md-10">-->
+                                    <!--<input class="form-control" name="email" type="text" placeholder="Email" required>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-lg-2 col-md-2 control-label">Content</label>-->
+
+                                <!--<div class="col-lg-10 col-md-10">-->
+                                    <!--<textarea class="form-control" name="commentContent" placeholder="Comment Content" rows="10"></textarea>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<div class="col-lg-offset-2 col-md-offset-2 col-lg-10  col-md-10">-->
+                                    <!--<input type="submit" class="btn btn-primary" value="Comment">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</fieldset>-->
+                    <!--</form>-->
+                <!--</div>-->
+            </tab>
+            <tab heading="简介">
+
+            </tab>
+        </tabset>
+
+    </div>
+</div>
