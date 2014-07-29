@@ -1,4 +1,4 @@
-package org.personal.mason.ass.domain.model;
+package org.personal.mason.ass.domain.model.authentication;
 
 import org.personal.mason.ass.common.auditing.model.Auditing;
 import org.personal.mason.ass.common.authority.model.Authority;

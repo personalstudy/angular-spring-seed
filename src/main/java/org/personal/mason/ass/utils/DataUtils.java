@@ -1,7 +1,7 @@
 package org.personal.mason.ass.utils;
 
-import org.personal.mason.ass.domain.model.ARole;
-import org.personal.mason.ass.domain.model.Account;
+import org.personal.mason.ass.domain.model.authentication.ARole;
+import org.personal.mason.ass.domain.model.authentication.Account;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,8 @@
-package org.personal.mason.ass.domain.repository;
+package org.personal.mason.ass.domain.repository.authentication;
 
 import org.personal.mason.ass.common.authority.service.UserService;
 import org.personal.mason.ass.common.jpa.AssJpaRepository;
-import org.personal.mason.ass.domain.model.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.personal.mason.ass.domain.model.authentication.Account;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

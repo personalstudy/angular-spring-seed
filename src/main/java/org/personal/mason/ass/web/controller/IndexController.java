@@ -1,11 +1,11 @@
 package org.personal.mason.ass.web.controller;
 
-import org.personal.mason.ass.domain.model.ARole;
-import org.personal.mason.ass.domain.model.Account;
-import org.personal.mason.ass.domain.repository.AccountRepository;
-import org.personal.mason.ass.domain.repository.GroupRepository;
-import org.personal.mason.ass.domain.repository.PersistTokenRepository;
-import org.personal.mason.ass.domain.repository.RoleRepository;
+import org.personal.mason.ass.domain.model.authentication.ARole;
+import org.personal.mason.ass.domain.model.authentication.Account;
+import org.personal.mason.ass.domain.repository.authentication.AccountRepository;
+import org.personal.mason.ass.domain.repository.authentication.GroupRepository;
+import org.personal.mason.ass.domain.repository.rememberme.PersistTokenRepository;
+import org.personal.mason.ass.domain.repository.authentication.RoleRepository;
 import org.personal.mason.ass.utils.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;

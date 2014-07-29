@@ -1,8 +1,8 @@
-package org.personal.mason.ass.domain.repository;
+package org.personal.mason.ass.domain.repository.rememberme;
 
 import org.personal.mason.ass.common.jpa.AssJpaRepository;
 import org.personal.mason.ass.common.rememberme.service.RememberMeTokenService;
-import org.personal.mason.ass.domain.model.APersistToken;
+import org.personal.mason.ass.domain.model.rememberme.APersistToken;
 
 /**
  * Created by mason on 7/27/14.

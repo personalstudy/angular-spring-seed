@@ -1,8 +1,9 @@
-package org.personal.mason.ass.domain.model;
+package org.personal.mason.ass.domain.model.rememberme;
 
 import org.personal.mason.ass.common.auditing.model.Auditing;
 import org.personal.mason.ass.common.authority.model.User;
 import org.personal.mason.ass.common.rememberme.model.RememberMeToken;
+import org.personal.mason.ass.domain.model.authentication.Account;
 
 import javax.persistence.*;
 import java.util.Date;
