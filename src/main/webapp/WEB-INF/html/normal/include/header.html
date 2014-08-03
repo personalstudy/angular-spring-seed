@@ -14,103 +14,16 @@
              ng-switch="authenticated">
 
             <ul class="nav navbar-nav">
-                <li ng-hide="isAdmin || isMerchant || isCavalier" class="active">
-                    <a href="#!!!/"><i class="glyphicon glyphicon-home"></i> 首页</a>
-                </li>
-                <li class="dropdown"
-                    ng-show="isUser">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span>
-                        <i class="glyphicon glyphicon-user"></i> 我的帐户<b class="caret"></b>
-                    </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#!!!/user/account"><i class="glyphicon glyphicon-info-sign"></i> 个人信息</a>
-                        </li>
-                        <li>
-                            <a href="#!!!/user/pwd"><i class="glyphicon glyphicon-lock"></i> 修改密码</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#!!!/user/shoppingcar"><i class="glyphicon glyphicon-shopping-cart"></i> 我的购物车</a>
-                        </li>
-                        <li>
-                            <a href="#!!!/user/order"><i class="glyphicon glyphicon-list-alt"></i> 我的订单</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="dropdown pointer"
-                    ng-if="isCavalier"  ng-class="{'active': isCavalier}">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span>
-                            <i class="glyphicon glyphicon-shop"></i> 我的配送<b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="#!!!/cavalier/current">正在配送</a>
-                        </li>
-                        <li>
-                            <a ng-href="#!!!/cavalier/finished">配送历史</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="dropdown pointer"
-                    ng-if="isMerchant"  ng-class="{'active': isMerchant}">
-                    <a ng-href="#!!!/merchant/merchants">我的店铺</a>
-                </li>
-
-                <li class="dropdown pointer"
-                    ng-if="isAdmin"  ng-class="{'active': isAdmin}">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span>
-                            <i class="glyphicon glyphicon-shop"></i>系统管理<b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="#!!!/admin/cavaliers">我的骑士</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#!!!/admin/merchants">商家</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#!!!/admin/order/current">当前订单</a>
-                        </li>
-                        <li>
-                            <a href="#!!!/admin/order/query">订单查询</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#!!!/admin/users">用户管理</a>
-                        </li>
-                        <li>
-                            <a href="#!!!/admin/roles">角色管理</a>
-                        </li>
-                        <li>
-                            <a href="#!!!/admin/groups">群组管理</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#!!!/admin/image">图片管理</a>
-                        </li>
-                    </ul>
-                </li>
 
             </ul>
             <div class="navbar-btn navbar-right" ng-switch="authenticated">
                 <div ng-switch-when="false">
-                    <a class="btn btn-primary" href="#!!!/login"><i class="glyphicon glyphicon-log-in"></i> 登录</a>
-                    <a class="btn btn-link btn-sm" href="#!!!/findpassword">忘记密码</a>
-                    <a class="btn btn-link btn-sm" href="#!!!/register"><i class="glyphicon glyphicon-plus-sign"></i> 注册</a>
+                    <a class="btn btn-primary" href="#/login"><i class="glyphicon glyphicon-log-in"></i> 登录</a>
+                    <a class="btn btn-link btn-sm" href="#/findpassword">忘记密码</a>
+                    <a class="btn btn-link btn-sm" href="#/register"><i class="glyphicon glyphicon-plus-sign"></i> 注册</a>
                 </div>
                 <div ng-switch-when="true">
-                    <a class="btn btn-link" href="#!!!/logout"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
+                    <a class="btn btn-link" href="#/logout"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
                 </div>
             </div>
         </div>

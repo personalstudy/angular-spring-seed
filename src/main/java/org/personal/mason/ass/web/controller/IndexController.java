@@ -1,19 +1,12 @@
 package org.personal.mason.ass.web.controller;
 
-import org.personal.mason.ass.domain.model.authentication.ARole;
-import org.personal.mason.ass.domain.model.authentication.Account;
-import org.personal.mason.ass.domain.repository.authentication.AccountRepository;
-import org.personal.mason.ass.domain.repository.authentication.GroupRepository;
-import org.personal.mason.ass.domain.repository.rememberme.PersistTokenRepository;
-import org.personal.mason.ass.domain.repository.authentication.RoleRepository;
-import org.personal.mason.ass.utils.DataUtils;
+import org.personal.mason.ass.common.oauth2.JpaClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
+import org.springframework.security.oauth2.provider.ClientRegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,23 +17,8 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private PersistTokenRepository persistTokenRepository;
-
     @RequestMapping({"/", "/index"})
     public String getIndexPage(Device device) {
-        DataUtils dataUtils = new DataUtils();
-        List<ARole> roles = dataUtils.initRoles();
-        Account account = dataUtils.initUser();
-        roleRepository.save(roles);
-        accountRepository.save(account);
-
         if (device != null && device.isMobile() || device.isTablet()) {
             return "mobile/" + "index";
         } else {

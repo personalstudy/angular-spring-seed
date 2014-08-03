@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by mason on 7/1/14.
@@ -25,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -74,33 +75,55 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling()
-                .authenticationEntryPoint(unauthorizedEntryPoint)
-                .and()
-            .rememberMe().
-                rememberMeServices(rememberMeService)
-                .key(env.getProperty("fl.security.rememberme.key", "remember_me_key"))
-                .and()
+        http.authorizeRequests()
+                .antMatchers("/login").permitAll().and()
+            .authorizeRequests()
+                .anyRequest().hasRole("USER").and()
+            .exceptionHandling()
+                .accessDeniedPage("/login.jsp?authorization_error=true").and()
+            .csrf()
+                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
+            .logout()
+                .logoutSuccessUrl("/index.jsp").logoutUrl("/logout.do").and()
             .formLogin()
-                .loginProcessingUrl("/user/login")
-                .successHandler(ajaxAuthenticationSuccessHandler)
-                .failureHandler(ajaxAuthenticationFailureHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll()
-                .and()
-            .logout()
-                .logoutUrl("/user/logout")
-                .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-                .deleteCookies("JSESSIONID")
-                .permitAll()
-                .and()
-            .csrf()
-                .disable()
-            .headers()
-                .frameOptions().disable()
-            .authorizeRequests()
-                .antMatchers("/account/register", "/user/login", "/user/logout", "/account/exist", "/public**").permitAll();
+                .failureUrl("/login?authentication_error=true")
+                .loginPage("/login")
+                .loginProcessingUrl("/login.do");
+
+//        http.exceptionHandling()
+//                .authenticationEntryPoint(unauthorizedEntryPoint)
+//                .and()
+//            .rememberMe().
+//                rememberMeServices(rememberMeService)
+//                .key(env.getProperty("fl.security.rememberme.key", "remember_me_key"))
+//                .and()
+//            .formLogin()
+//                .loginProcessingUrl("/user/login")
+//                .successHandler(ajaxAuthenticationSuccessHandler)
+//                .failureHandler(ajaxAuthenticationFailureHandler)
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .permitAll()
+//                .and()
+//            .logout()
+//                .logoutUrl("/user/logout")
+//                .logoutSuccessHandler(ajaxLogoutSuccessHandler)
+//                .deleteCookies("JSESSIONID")
+//                .permitAll()
+//                .and()
+//            .csrf()
+//                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+//                .disable()
+//            .headers()
+//                .frameOptions().disable()
+//            .authorizeRequests()
+//                .antMatchers("/account/register", "/user/login", "/user/logout", "/account/exist", "/public**").permitAll()
+//            .and()
+//            .authorizeRequests().anyRequest().hasRole("USER").and()
+        ;
+
 
 
     }

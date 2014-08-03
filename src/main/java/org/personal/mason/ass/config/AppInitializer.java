@@ -2,11 +2,17 @@ package org.personal.mason.ass.config;
 
 import org.springframework.mobile.device.DeviceResolverRequestFilter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 /**
  * Created by mason on 7/13/14.
@@ -16,7 +22,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{AppConfig.class, PropertiesConfig.class, DataSourceConfig.class, SecurityConfiguration.class};
+        return new Class<?>[]{AppConfig.class, PropertiesConfig.class, DataSourceConfig.class, SecurityConfiguration.class, OAuth2ServerConfig.class};
     }
 
     @Override

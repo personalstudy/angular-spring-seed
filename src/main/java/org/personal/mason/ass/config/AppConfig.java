@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 /**
  * Created by mason on 7/13/14.
  */
+
 @Configuration
 @ComponentScan(basePackages = "org.personal.mason.ass")
 public class AppConfig {

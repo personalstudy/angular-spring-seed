@@ -7,6 +7,7 @@ import org.personal.mason.ass.common.oauth2.service.ApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.approval.Approval;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Created by mason on 8/3/14.
  */
+@Component
 public class JpaApprovalStore implements ApprovalStore {
     private final Log logger = LogFactory.getLog(getClass());
     private boolean handleRevocationsAsExpiry = false;

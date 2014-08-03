@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.DefaultAuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -27,6 +28,7 @@ import java.util.List;
 /**
  * Created by mason on 8/3/14.
  */
+@Component
 public class JpaTokenStore implements TokenStore {
     private static final Log LOG = LogFactory.getLog(JpaTokenStore.class);
     private AuthenticationKeyGenerator authenticationKeyGenerator = new DefaultAuthenticationKeyGenerator();
@@ -228,7 +230,7 @@ public class JpaTokenStore implements TokenStore {
     private void removeAccessTokenUsingRefreshToken(String refreshToken) {
        try{
         String refreshTokenId = extractTokenKey(refreshToken);
-        List<OauthAccessToken> accessTokens = accessTokenService.findByRefreshTokenId(refreshTokenId);
+        List<OauthAccessToken> accessTokens = accessTokenService.findByRefreshToken(refreshTokenId);
 
         if(accessTokens == null || accessTokens.isEmpty()){
             throw new EmptyResultDataAccessException(1);

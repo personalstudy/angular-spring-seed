@@ -4,6 +4,7 @@ import org.springframework.security.oauth2.config.annotation.builders.ClientDeta
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 /**
  * Created by mason on 8/3/14.
  */
+@Component
 public class JpaClientDetailsServiceBuilder extends ClientDetailsServiceBuilder<JpaClientDetailsServiceBuilder> {
     private Set<ClientDetails> clientDetails = new HashSet<ClientDetails>();
 

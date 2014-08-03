@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Created by mason on 8/3/14.
  */
+@Component
 public class JpaClientDetailsService implements ClientDetailsService, ClientRegistrationService {
     private final Log logger = LogFactory.getLog(getClass());
 
@@ -59,6 +61,9 @@ public class JpaClientDetailsService implements ClientDetailsService, ClientRegi
         try {
             OauthClient client = clientService.newInstance();
             client.setClientId(clientDetails.getClientId());
+            String clientSecret = clientDetails.getClientSecret();
+            clientSecret = passwordEncoder.encode(clientSecret);
+            client.setSecret(clientSecret);
             mergeToClient(client, clientDetails);
             clientService.save(client);
         }
