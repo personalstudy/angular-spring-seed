@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "ass_persist_token")
-public class APersistToken extends Auditing<Account, Long> implements RememberMeToken {
+public class RPersistToken extends Auditing<Account, Long> implements RememberMeToken {
 
     @Column(name = "token_value")
     private String tokenValue;
