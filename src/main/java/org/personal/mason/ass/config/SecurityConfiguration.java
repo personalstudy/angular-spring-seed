@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/resources/")
+                .antMatchers("/resources/**")
                 .antMatchers("/view**")
                 .antMatchers("/");
     }
@@ -76,20 +76,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login").permitAll().and()
+                .antMatchers("/#/login").permitAll().and()
             .authorizeRequests()
                 .anyRequest().hasRole("USER").and()
             .exceptionHandling()
-                .accessDeniedPage("/login.jsp?authorization_error=true").and()
+                .accessDeniedPage("/#/login?authorization_error=true").and()
             .csrf()
                 .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
             .logout()
-                .logoutSuccessUrl("/index.jsp").logoutUrl("/logout.do").and()
+                .logoutSuccessUrl("/#/login").logoutUrl("/logout.do").and()
             .formLogin()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .failureUrl("/login?authentication_error=true")
-                .loginPage("/login")
+                .failureUrl("/#/login?authentication_error=true")
+                .loginPage("/#/login")
                 .loginProcessingUrl("/login.do");
 
 //        http.exceptionHandling()
