@@ -45,9 +45,19 @@ public class AGroup extends Auditing<Account, Long> implements Group {
     }
 
     @Override
-    public Collection<? extends Authority> getRoles() {
-        return null;
+    public Set<ARole> getRoles() {
+        return this.roles;
     }
 
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
 
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void setRoles(Set<ARole> roles) {
+        this.roles = roles;
+    }
 }

@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * Created by mason on 7/22/14.
  */
-public interface GroupService {
+public interface GroupService<T extends Group> {
 
-    List<? extends Group> findAllGroups();
+    List<T> findAllGroups();
 
     List<? extends User> findUsersInGroup(String groupName);
 

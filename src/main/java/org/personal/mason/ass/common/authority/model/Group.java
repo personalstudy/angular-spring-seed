@@ -1,6 +1,6 @@
 package org.personal.mason.ass.common.authority.model;
 
-import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by mason on 7/20/14.
@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface Group {
     boolean isEnabled();
 
-    Collection<? extends Authority> getRoles();
+    Set<? extends Authority> getRoles();
 }
